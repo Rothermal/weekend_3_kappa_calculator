@@ -1,5 +1,5 @@
 var buttonArray = [1,2,3,4,5,6,7,8,9,0];
-var operatorArray = ['+','add','-','sub', '*','mult','/','div'];
+var operatorArray = ['+','add','-','sub','*','mult','/','div'];
 var x = 0;
 var y = 0;
 var type = "";
@@ -60,9 +60,6 @@ function makeCalc(){
 
 }
 
-
-
-
 // display numbers pressed, on the calculator screen
 function insertNumber(){
     var number = $(this).parent().data('number');
@@ -90,7 +87,7 @@ function resetCalc (){
     $('.calculator').empty();
     makeCalc();
 }
-
+//
 function performCalc (){
     console.log('clicked');
     y = $('.screen').text();
