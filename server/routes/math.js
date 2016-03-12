@@ -6,7 +6,7 @@ var subtract = require('../modules/subtraction');
 var multiply = require('../modules/multiplication');
 var divide = require('../modules/division');
 
-router.post('/math/add',function (request,response){
+router.post('math/add',function (request,response){
     var calcResults = request.body;
     calcResults.type = "+";
     calcResults.answer = add(calcResults.x,calcResults.y);
@@ -15,7 +15,6 @@ router.post('/math/add',function (request,response){
 
 router.post('/math/sub',function (request,response){
     var calcResults = request.body;
-    calcResults.equals = '=';
     calcResults.type = "-";
     calcResults.answer = subtract(calcResults.x,calcResults.y);
     response.send(calcResults);
