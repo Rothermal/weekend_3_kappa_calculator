@@ -3,6 +3,8 @@
  */
 
 var multiply = function (x,y){
+    x = parseFloat(x);
+    y = parseFloat(y);
     var result = x * y;
     return result;
 };

@@ -8,7 +8,7 @@ var math = require('./math');
 
 
 
-router.post('/math',math);
+router.post('/math/:type',math);
 
 
 
