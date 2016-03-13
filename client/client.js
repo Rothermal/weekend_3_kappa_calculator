@@ -78,7 +78,7 @@ function setOperation(){
     var operation = $(this).parent().data('operation');
         type = operation;
         x = $('.screen').text();
-        console.log('x and type set', x , " ", type);
+        console.log('x = ',x,'type is set to : ',type);
         $('.screen').empty();
         $(this).addClass('selected');
         disable();
