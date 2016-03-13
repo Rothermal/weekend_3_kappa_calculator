@@ -36,7 +36,10 @@ function disableAll(){
     $('.equals').prop('disabled', true);
 }
 
-// append the dom with all the divs/ buttons/ fields for calculator.
+
+////////////////////////////////////////////////////////////////////
+// append the dom with all the divs/buttons for calculator.
+////////////////////////////////////////////////////////////////////
 function makeCalc(){
     $('.calculator').append('<div class="screen well"></div>');
 
@@ -68,6 +71,9 @@ function makeCalc(){
     $eleme.append('<button class="btn btn-success equals">=</button>');
 
 }
+/////////////////////////////////
+// end of makeCalc function
+/////////////////////////////////
 
 // display the numbers pressed, on the calculator screen.
 function insertNumber(){
@@ -102,7 +108,12 @@ function resetCalc (){
     type = "";
     makeCalc();
 }
-// sets the second argument, checks for errors, makes ajax call. gets calc ready for reuse.
+
+///////////////////////////////////////////////////////////////////////////////////////
+// hit equal button, runs the perform calc function, sets y if neccesary,
+// checks to make sure x and y and an operator have been set
+// then performs ajax call because science, on success checks to make sure answer is valid.
+//////////////////////////////////////////////////////////////////////////////////////////
 function performCalc (){
     // basicly a check to see if user spamming the equals button and allows calculator to continue to function properly.
     // would go more in depth but i spent a lot of time debugging this. brain hurts now.
@@ -146,3 +157,6 @@ function performCalc (){
     });
     }
 }
+/////////////////////////////////////////////////////////////////
+// "this is the end, my only friend, the end" Jim Morrison
+/////////////////////////////////////////////////////////////////
