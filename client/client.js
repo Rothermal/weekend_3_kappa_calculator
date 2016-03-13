@@ -77,6 +77,13 @@ function makeCalc(){
 
 // display the numbers pressed, on the calculator screen.
 function insertNumber(){
+    // if someone just wants to start a new calculation and they are 2 lazy to hit clear...
+    if($('.screen').text().length > 0 && $('.operator').hasClass('selected') === false && x.length !== 0){
+        $('.screen').empty();
+        x = "";
+        y = "";
+        type = "";
+    }
     var number = $(this).parent().data('number');
     $('.screen').append('<span>'+number+'</span>');
 }
