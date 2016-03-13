@@ -1,7 +1,7 @@
 var buttonArray = [1,2,3,4,5,6,7,8,9,0];
 var operatorArray = ['+','add','-','sub','*','mult','/','div'];
-var x = 0;
-var y = 0;
+var x = "";
+var y = "";
 var type = "";
 
 $(document).ready(function(){
@@ -25,6 +25,14 @@ function enable(){
 //turn off operator buttons.
 function disable(){
     $('.operator').prop('disabled', true);
+}
+
+// after calculations made, disable all buttons until calculator is reset.
+function disableAll(){
+    $('.operator').prop('disabled', true);
+    $('.number').prop('disabled', true);
+    $('.decimal').prop('disabled', true);
+    $('.equals').prop('disabled', true);
 }
 
 // append the dom with all the divs/ buttons/ fields for calculator.
@@ -52,7 +60,7 @@ function makeCalc(){
     var  $elem = $('.calculator').children().last();
     $elem.append('<button class="btn btn-default decimal">.</button>');
 
-// make button for equals sign. and reset calculator
+// make button for equals sign. and a clear/reset button
     $('.calculator').append('<div class="equal container col-xs-12 "></div>');
     var  $eleme = $('.calculator').children().last();
     $eleme.append('<button class="btn btn-primary clear">clear</button>');
@@ -60,7 +68,7 @@ function makeCalc(){
 
 }
 
-// display numbers pressed, on the calculator screen
+// display the numbers pressed, on the calculator screen.
 function insertNumber(){
     var number = $(this).parent().data('number');
     $('.screen').append('<span>'+number+'</span>');
@@ -85,24 +93,37 @@ function addDecimal(){
 // clears out calculator and rebuilds it.
 function resetCalc (){
     $('.calculator').empty();
+    x = "";
+    y = "";
+    type = "";
     makeCalc();
 }
 //
 function performCalc (){
     console.log('clicked');
     y = $('.screen').text();
-    console.log('x y and type', x ," ",y," ",type);
+    console.log('x = ',x,'y = ',y,' and type is ',type);
     $('.screen').empty();
+    if(x.length === 0 || y.length === 0) {
+        $('.screen').append('<span>Error, press clear.try again.</span>');
+        disableAll();
+    } else {
     $.ajax({
-       type:'POST',
-       url:"/math/"+type,
-       data: {x:x,
-              y:y
-       },
-        success:function(response){
-        console.log(response);
-            $('.screen').append('<span>'+response.answer+'</span>');
+        type: 'POST',
+        url: "/math/" + type,
+        data: {
+            x: x,
+            y: y
+        },
+        success: function (response) {
+            console.log(response);
+            $('.screen').append('<span>' + response.answer + '</span>');
+            disableAll();
 
         }
     });
+    }
+
+
+
 }
