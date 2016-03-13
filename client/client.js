@@ -28,7 +28,7 @@ function disable(){
     $('.operator').prop('disabled', true);
 }
 
-// after calculations made, disable all buttons until calculator is reset.
+// if an error happens disable all buttons until calculator is reset.
 function disableAll(){
     $('.operator').prop('disabled', true);
     $('.number').prop('disabled', true);
