@@ -117,7 +117,7 @@ function performCalc (){
     // bug check to make sure there are numbers to evaluate. if not, disable all buttons and make user press clear to start
     // start over.
     if(x.length === 0 || y.length === 0) {
-        $('.screen').append('<span>Error, press clear.try again.</span>');
+        $('.screen').append('<span>Maybe try numbers?! press clear</span>');
         disableAll();
     } else {
 
@@ -130,11 +130,17 @@ function performCalc (){
         },
         success: function (response) {
             console.log(response);
-            $('.screen').append('<span>' + response.answer + '</span>');
             answer = response.answer;
-            x = answer;
-            $('.operator').prop('disabled', false);
-            if($('.operator').hasClass('selected')){
+            // if someone divides by 0
+            if(answer === null){
+                $('.screen').append('<span>Dividing by 0 = press clear #newb</span>');
+                disableAll();
+            }else {
+                $('.screen').append('<span>' + answer + '</span>');
+                x = answer;
+                $('.operator').prop('disabled', false);
+            }
+                if($('.operator').hasClass('selected')){
                 $('.operator').removeClass('selected');
             }
 
