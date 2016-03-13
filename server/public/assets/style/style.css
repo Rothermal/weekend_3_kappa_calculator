@@ -6,12 +6,6 @@
     background-color: lightgrey;
 }
 
-.selected{
-    background-color: tomato;
-}
-.selected:hover{
-    background-color: tomato !important;
-}
 .equals{
     float: right;
     margin-right: 7px;
@@ -22,6 +16,7 @@
     background-color: aliceblue;
 }
 .btn {
+    color: #0f0f0f;
     font-size: large;
     font-weight: bold;
     height: 50px;
@@ -31,7 +26,15 @@
 .clear {
     width: 75px;
 }
-.operator {
+.operator, .decimal {
+
     font-size: large;
     font-weight: bold;
+}
+
+.selected{
+    background-color: #4f0000;
+}
+.selected:hover{
+    background-color: tomato !important;
 }

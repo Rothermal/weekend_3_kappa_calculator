@@ -28,7 +28,7 @@ function disable(){
     $('.operator').prop('disabled', true);
 }
 
-// if an error happens disable all buttons until calculator is reset.
+// disable all buttons until calculator is reset.
 function disableAll(){
     $('.operator').prop('disabled', true);
     $('.number').prop('disabled', true);
@@ -45,7 +45,7 @@ function makeCalc(){
         $('.calculator').append('<div class="buttons container col-xs-4 "></div>');
         var $el = $('.calculator').children().last();
         $el.data('number', buttonArray[i]);
-        $el.append('<button class="btn btn-default number">' + buttonArray[i] + '</button>');
+        $el.append('<button class="btn btn-info number">' + buttonArray[i] + '</button>');
     }
 // make math operator buttons
 
@@ -53,13 +53,13 @@ function makeCalc(){
         $('.calculator').append('<div class="operation container col-xs-4 "></div>');
         var $ele = $('.calculator').children().last();
         $ele.data('operation', operatorArray[i + 1]);
-        $ele.append('<button class="btn btn-default operator">' + operatorArray[i] + '</button>');
+        $ele.append('<button class="btn btn-warning operator">' + operatorArray[i] + '</button>');
     }
 // make button for decimal point.
 
     $('.calculator').append('<div class="operation container col-xs-4 "></div>');
     var  $elem = $('.calculator').children().last();
-    $elem.append('<button class="btn btn-default decimal">.</button>');
+    $elem.append('<button class="btn btn-warning decimal">.</button>');
 
 // make button for equals sign. and a clear/reset button
     $('.calculator').append('<div class="equal container col-xs-12 "></div>');
@@ -105,7 +105,7 @@ function resetCalc (){
 // sets the second argument, checks for errors, makes ajax call. gets calc ready for reuse.
 function performCalc (){
     // basicly a check to see if user spamming the equals button and allows calculator to continue to function properly.
-    // would go more in depth but i spend a lot of time debugging this. brain hurts now.
+    // would go more in depth but i spent a lot of time debugging this. brain hurts now.
     if(answer !== null && $('.operator').hasClass('selected') === false) {
         console.log('y does not change');
     }else {
@@ -114,11 +114,9 @@ function performCalc (){
     console.log('x = ',x,'y = ',y,' and type is ',type);
     $('.screen').empty();
 
-    // bug check to make sure there are numbers to evaluate. if not, disable all buttons and make user press clear to start
-    // start over.
+    // check to make sure there are numbers to evaluate.
     if(x.length === 0 || y.length === 0) {
-        $('.screen').append('<span>Maybe try numbers?! press clear</span>');
-        disableAll();
+        console.log('need to pick numbers and an operation...try again.');
     } else {
 
         $.ajax({
@@ -133,7 +131,7 @@ function performCalc (){
             answer = response.answer;
             // if someone divides by 0
             if(answer === null){
-                $('.screen').append('<span>Dividing by 0 = press clear #newb</span>');
+                $('.screen').append('<span>Only communists divide by 0</span>');
                 disableAll();
             }else {
                 $('.screen').append('<span>' + answer + '</span>');
