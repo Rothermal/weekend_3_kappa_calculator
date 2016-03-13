@@ -2,15 +2,36 @@
     height: 500px;
     width: 300px;
 }
+.calculator, .well{
+    background-color: lightgrey;
+}
 
 .selected{
     background-color: tomato;
 }
+.selected:hover{
+    background-color: tomato !important;
+}
 .equals{
     float: right;
-    margin-right: 25px;
+    margin-right: 7px;
 }
 
 .screen{
     height: 20px;
+    background-color: aliceblue;
+}
+.btn {
+    font-size: large;
+    font-weight: bold;
+    height: 50px;
+    width: 50px;
+}
+
+.clear {
+    width: 75px;
+}
+.operator {
+    font-size: large;
+    font-weight: bold;
 }

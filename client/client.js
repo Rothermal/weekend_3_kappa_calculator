@@ -75,12 +75,12 @@ function insertNumber(){
 }
 // determine math operation
 function setOperation(){
-    var operation= $(this).parent().data('operation');
+    var operation = $(this).parent().data('operation');
         type = operation;
         x = $('.screen').text();
         console.log('x and type set', x , " ", type);
         $('.screen').empty();
-    $(this).addClass('selected');
+        $(this).addClass('selected');
         disable();
 
 }
@@ -88,7 +88,6 @@ function setOperation(){
 function addDecimal(){
     $('.screen').append('<span>.</span>');
 }
-
 
 // clears out calculator and rebuilds it.
 function resetCalc (){
@@ -98,7 +97,7 @@ function resetCalc (){
     type = "";
     makeCalc();
 }
-//
+// sets the second argument, checks for errors, makes ajax call. gets calc ready for reuse.
 function performCalc (){
     console.log('clicked');
     y = $('.screen').text();
@@ -118,12 +117,12 @@ function performCalc (){
         success: function (response) {
             console.log(response);
             $('.screen').append('<span>' + response.answer + '</span>');
-            disableAll();
+            $('.operator').prop('disabled', false);
+            if($('.operator').hasClass('selected')){
+                $('.operator').removeClass('selected');
+            }
 
         }
     });
     }
-
-
-
 }
