@@ -3,6 +3,7 @@ var operatorArray = ['+','add','-','sub','*','mult','/','div'];
 var x = "";
 var y = "";
 var type = "";
+var answer = null;
 
 $(document).ready(function(){
    init();
@@ -73,11 +74,15 @@ function insertNumber(){
     var number = $(this).parent().data('number');
     $('.screen').append('<span>'+number+'</span>');
 }
-// determine math operation
+// determine math operation and sets x.
 function setOperation(){
     var operation = $(this).parent().data('operation');
         type = operation;
+        if(x.length !== 0) {
+            console.log('must be chaining calculations together x is the previous answer.');
+        } else {
         x = $('.screen').text();
+        }
         console.log('x = ',x,'type is set to : ',type);
         $('.screen').empty();
         $(this).addClass('selected');
@@ -99,15 +104,24 @@ function resetCalc (){
 }
 // sets the second argument, checks for errors, makes ajax call. gets calc ready for reuse.
 function performCalc (){
-    console.log('clicked');
-    y = $('.screen').text();
+    // basicly a check to see if user spamming the equals button and allows calculator to continue to function properly.
+    // would go more in depth but i spend a lot of time debugging this. brain hurts now.
+    if(answer !== null && $('.operator').hasClass('selected') === false) {
+        console.log('y does not change');
+    }else {
+        y = $('.screen').text();
+    }
     console.log('x = ',x,'y = ',y,' and type is ',type);
     $('.screen').empty();
+
+    // bug check to make sure there are numbers to evaluate. if not, disable all buttons and make user press clear to start
+    // start over.
     if(x.length === 0 || y.length === 0) {
         $('.screen').append('<span>Error, press clear.try again.</span>');
         disableAll();
     } else {
-    $.ajax({
+
+        $.ajax({
         type: 'POST',
         url: "/math/" + type,
         data: {
@@ -117,6 +131,8 @@ function performCalc (){
         success: function (response) {
             console.log(response);
             $('.screen').append('<span>' + response.answer + '</span>');
+            answer = response.answer;
+            x = answer;
             $('.operator').prop('disabled', false);
             if($('.operator').hasClass('selected')){
                 $('.operator').removeClass('selected');
