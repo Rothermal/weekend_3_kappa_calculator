@@ -27,8 +27,11 @@ function enable(){
 function disable(){
     $('.operator').prop('disabled', true);
 }
-
+////////////////////////////////////////////////////////////
 // disable all buttons until calculator is reset.
+// this function has been deprecated ever since the
+// addition of the if statement in the insert numbers function
+//////////////////////////////////////////////////////////////
 function disableAll(){
     $('.operator').prop('disabled', true);
     $('.number').prop('disabled', true);
@@ -80,6 +83,7 @@ function insertNumber(){
     // if someone just wants to start a new calculation and they are 2 lazy to hit clear...
     if($('.screen').text().length > 0 && $('.operator').hasClass('selected') === false && x.length !== 0){
         $('.screen').empty();
+        $('.operator').prop('disabled', false);
         x = "";
         y = "";
         type = "";
@@ -119,7 +123,7 @@ function resetCalc (){
 ///////////////////////////////////////////////////////////////////////////////////////
 // hit equal button, runs the perform calc function, sets y if neccesary,
 // checks to make sure x and y and an operator have been set
-// then performs ajax call because science, on success checks to make sure answer is valid.
+// then performs ajax call, because science, on success checks to make sure answer is valid.
 //////////////////////////////////////////////////////////////////////////////////////////
 function performCalc (){
     // basicly a check to see if user spamming the equals button and allows calculator to continue to function properly.
@@ -150,7 +154,7 @@ function performCalc (){
             // if someone divides by 0
             if(answer === null){
                 $('.screen').append('<span>Only communists divide by 0</span>');
-                disableAll();
+                //disableAll();
             }else {
                 $('.screen').append('<span>' + answer + '</span>');
                 x = answer;
