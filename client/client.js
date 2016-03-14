@@ -27,11 +27,8 @@ function enable(){
 function disable(){
     $('.operator').prop('disabled', true);
 }
-////////////////////////////////////////////////////////////
+
 // disable all buttons until calculator is reset.
-// this function has been deprecated ever since the
-// addition of the if statement in the insert numbers function
-//////////////////////////////////////////////////////////////
 function disableAll(){
     $('.operator').prop('disabled', true);
     $('.number').prop('disabled', true);
@@ -138,7 +135,9 @@ function performCalc (){
 
     // check to make sure there are numbers to evaluate.
     if(x.length === 0 || y.length === 0) {
-        console.log('need to pick numbers and an operation...try again.');
+        $('.screen').append('<span>It didn\'t work out. press clear</span>');
+        disableAll();
+
     } else {
 
         $.ajax({
@@ -154,7 +153,6 @@ function performCalc (){
             // if someone divides by 0
             if(answer === null){
                 $('.screen').append('<span>Only communists divide by 0</span>');
-                //disableAll();
             }else {
                 $('.screen').append('<span>' + answer + '</span>');
                 x = answer;
